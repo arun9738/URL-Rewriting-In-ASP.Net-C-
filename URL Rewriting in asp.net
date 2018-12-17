@@ -1,0 +1,26 @@
+URL Rewriting in asp.net in Global.asax file
+
+//Import this namespace
+<%@ Import Namespace="System.Web.Routing" %>
+
+//Use Run at server for the script
+<script runat="server">
+
+//Create a Routing Method
+    void RegisterProducts(RouteCollection routes)
+    {
+        //routes.Ignore("{resource}.axd/{*pathInfo}");
+        routes.Clear();
+        routes.MapPageRoute("Product", "Product/{ProductName}", "~/Product.aspx");
+        routes.MapPageRoute("SubCategory", "SubCategory/{SubCategoryName}", "~/SubCategory.aspx");
+        routes.MapPageRoute("Category", "Category/{CategoryName}", "~/Category.aspx");
+        routes.MapPageRoute("Blogs", "Blogs/{BlogName}", "~/BlogDesc.aspx");
+
+    }
+    
+    //Call the method to rewrite
+    void Application_Start(object sender, EventArgs e)
+    {
+        // Code that runs on application startup
+        RegisterProducts(RouteTable.Routes);
+    }
